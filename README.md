@@ -2,7 +2,7 @@
 ## Deep Dive Into Modern Web Development
 
 ### Table of Contents
-0. Fundamentals of Web Apps
+0. ~~Fundamentals of Web Apps~~
 1. Introduction to React
     * Introduction to React
     * Javascript
@@ -46,3 +46,5 @@
     * Database and user administration
     * Login and updating the cache
     * Fragments and subscriptions
+
+###### Repository mirrored at https://github.com/a-swan/fullstackopen2019
