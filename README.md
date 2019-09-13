@@ -3,11 +3,11 @@
 
 ### Table of Contents
 0. ~~Fundamentals of Web Apps~~
-1. Introduction to React
-    * Introduction to React
-    * Javascript
-    * Component state, event handlers
-    * A more complex state, debugging React apps
+1. ~~Introduction to React~~
+    * ~~Introduction to React~~
+    * ~~Javascript~~
+    * ~~Component state, event handlers~~
+    * ~~A more complex state, debugging React apps~~
 2. Communicating with Server
     * Rendering a collection, modules
     * Forms
