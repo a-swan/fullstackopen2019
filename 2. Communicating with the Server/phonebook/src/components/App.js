@@ -1,17 +1,25 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Filter from './Filter'
 import PersonForm from './PersonForm'
+import Persons from './Persons'
+import axios from 'axios'
 
 const App = () => {
-    const [persons, setPersons] = useState([
-        { name: 'Arto Hellas', phone: '040-123456' },
-        { name: 'Ada Lovelace', phone: '39-44-5323523' },
-        { name: 'Dan Abramov', phone: '12-43-234345' },
-        { name: 'Mary Poppendieck', phone: '39-23-6423122' }
-    ])
+    const [persons, setPersons] = useState([])
     const [newName, setNewName] = useState('')
     const [newPhone, setNewPhone] = useState('')
     const [showAll, setShowAll] = useState('')
+
+    useEffect(() => {
+        console.log('effect')
+        axios
+            .get('http://localhost:3001/persons')
+            .then(response => {
+                console.log('promise fulfilled', response)
+                setPersons(response.data)
+            })
+    }, [])
+    console.log('render', persons.length, 'people')
 
     const addPerson = (event) => {
         event.preventDefault()
@@ -25,6 +33,7 @@ const App = () => {
                 window.alert(`${newName} is already in phonebook`)
                 return true
             }
+            return false
         }, false)
 
         console.log('duplicate = ', duplicate)
@@ -60,7 +69,6 @@ const App = () => {
         setShowAll(event.target.value)
     }
 
-    const listPersons = () => personsToShow.map(person => <li key={person.name}>{person.name} {person.phone}</li>)
 
     return (
         <div>
@@ -68,15 +76,11 @@ const App = () => {
             <Filter filterValue={showAll} handleFilter={handleFilter} />
 
             <h2>Add a New User</h2>
-            <PersonForm handleSubmit={addPerson} newName={newName} handeNewPerson={handleNewPerson} newPhone={newPhone} handleNewPhone={handleNewPhone} />
-
-            
+            <PersonForm handleSubmit={addPerson} newName={newName} handleNewPerson={handleNewPerson} newPhone={newPhone} handleNewPhone={handleNewPhone} />
 
             <h2>Numbers</h2>
-            <div>
-                {listPersons()}
-            </div>
-    </div>
+            <Persons persons={personsToShow} />
+        </div>
     )
 }
 
