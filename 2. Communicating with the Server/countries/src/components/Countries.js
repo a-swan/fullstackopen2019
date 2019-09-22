@@ -1,20 +1,15 @@
-import React from 'react'
-import Country from './Country'
+import React from 'react';
+import Country from './Country';
 
-const Countries = ({ countriesData }) => {
+const Countries = ({ countriesData, handleShow }) => {
 
-    const handleShow = (event) => {
-        console.log("target ID", event.target.id)
-        return < Country key={countriesData[event.target.id].alpha2Code} country={countriesData[event.target.id]} />
-    }
-
-    const listCountries = () => {
-        if (countriesData.length === 1) {
-            return countriesData.map(country => < Country key = { country.alpha2Code } country = { country } />)
+    const listCountries = (countryData) => {
+        if (countryData.length === 1) {
+            return countryData.map(country => < Country key = { country.alpha2Code } country = { country } />)
         }
-        else if (countriesData.length > 0 && countriesData.length < 11) {
-            console.log('less 11: ', countriesData)
-            return countriesData.map(country => <li key={country.alpha2Code}>{country.name} <button type="button" id={countriesData.indexOf(country)} onClick={handleShow}>show</button></li>)
+        else if (countryData.length > 0 && countryData.length < 11) {
+            console.log('less 11: ', countryData)
+            return countryData.map(country => <li key={country.alpha2Code}>{country.name} <button type="button" id={country.alpha2Code} onClick={handleShow}>show</button></li>)
         }
         else {
             console.log('Too many matches, specify another filter')
@@ -25,7 +20,7 @@ const Countries = ({ countriesData }) => {
 
     return (
         <div>
-            {listCountries()}
+            {listCountries(countriesData)}
         </div>
     )
 }

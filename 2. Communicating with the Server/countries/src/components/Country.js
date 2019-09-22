@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const Country = ({ country }) => {
     console.log("country: ", country)
@@ -17,7 +17,9 @@ const Country = ({ country }) => {
             <ul>
                 {listLang()}
             </ul>
-            <img src={country.flag} width="280" />
+            <img src={country.flag} alt="" width="280" />
+
+            <h2>Weather in {country.capital}</h2>
         </>
     )
 }
