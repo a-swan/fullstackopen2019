@@ -8,12 +8,12 @@
     * ~~Javascript~~
     * ~~Component state, event handlers~~
     * ~~A more complex state, debugging React apps~~
-2. Communicating with Server
-    * Rendering a collection, modules
-    * Forms
-    * Getting data from server
-    * Altering data in server
-    * Adding styles to React app
+2. ~~Communicating with Server~~
+    * ~~Rendering a collection, modules~~
+    * ~~Forms~~
+    * ~~Getting data from server~~
+    * ~~Altering data in server~~
+    * ~~Adding styles to React app~~
 3. Programming a server with NodeJS and Express
     * Node.js and Express
     * Deploying app to internet
