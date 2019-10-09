@@ -1,8 +1,17 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
+const morgan = require('morgan')
 
 app.use(bodyParser.json())
+
+morgan.token('content', (req,res) => {
+    return JSON.stringify(req.body)
+})
+
+var loggerFormat = ':method :date[web] :status :res[content-length] - :response-time ms :content'
+
+app.use(morgan(loggerFormat))
 
 let phonebook = [
     {
@@ -30,7 +39,7 @@ let phonebook = [
 app.get('/', (req, res) => {
     res.send('<h1>Hello World</h1>')
 
-    console.log('Root Directory: Hello World')
+    //console.log('Root Directory: Hello World')
 })
 
 const generateId = () => {
@@ -41,15 +50,15 @@ app.post('/api/persons', (req, res) => {
     const body = req.body
 
     if (!body.name) {
-        console.log('400: name missing')
+        //console.log('400: name missing')
         return res.status(400).json({ error: 'name missing' })
     }
     else if (!body.number) {
-        console.log('400: number missing')
+        //console.log('400: number missing')
         return res.status(400).json({ error: 'number missing' })
     }
     else if (phonebook.find(person => person.name === body.name)) {
-        console.log(`400: ${body.name} already in phonebook`)
+        //console.log(`400: ${body.name} already in phonebook`)
         return res.status(400).json({error: 'name must be unique'})
     }
 
@@ -61,7 +70,7 @@ app.post('/api/persons', (req, res) => {
 
     phonebook = phonebook.concat(person)
 
-    console.log(`Adding: ${person.name}`)
+    //console.log(`Adding: ${person.name}`)
 
     res.json(person)
 })
@@ -69,14 +78,14 @@ app.post('/api/persons', (req, res) => {
 app.get('/api/persons', (req, res) => {
     res.json(phonebook)
 
-    console.log('API/persons: get all')
+    //console.log('API/persons: get all')
 })
 
 app.get('/info', (req, res) => {
     const datetime = new Date()
     res.send(`<p>Phonebook has info for ${phonebook.length}<br />${datetime}</p>`)
 
-    console.log(`Info: ${phonebook.length} ${datetime}`)
+    //console.log(`Info: ${phonebook.length} ${datetime}`)
 })
 
 app.get('/api/persons/:id', (req, res) => {
@@ -86,12 +95,12 @@ app.get('/api/persons/:id', (req, res) => {
     if (person) {
         res.json(person)
 
-        console.log(`Get: ${id}`)
+        //console.log(`Get: ${id}`)
     }
     else {
         res.status(404).end()
 
-        console.log(`404: ${id}`)
+        //console.log(`404: ${id}`)
     }
 })
 
@@ -101,7 +110,7 @@ app.delete('/api/persons/:id', (req, res) => {
 
     res.status(204).end()
 
-    console.log(`Deleted: ${id}`)
+    //console.log(`Deleted: ${id}`)
 })
 
 
