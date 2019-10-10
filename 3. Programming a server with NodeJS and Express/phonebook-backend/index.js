@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
+const cors = require('cors')
 
 app.use(bodyParser.json())
 
@@ -12,7 +13,7 @@ morgan.token('content', (req,res) => {
 var loggerFormat = ':method :date[web] :status :res[content-length] - :response-time ms :content'
 
 app.use(morgan(loggerFormat))
-
+app.use(cors())
 let phonebook = [
     {
         "name": "Arto Hellas",
