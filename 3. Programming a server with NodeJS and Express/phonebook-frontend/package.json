@@ -12,7 +12,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build:ui": "npm run build --prod && cp -r build ../phonebook-backend"
   },
   "eslintConfig": {
     "extends": "react-app"

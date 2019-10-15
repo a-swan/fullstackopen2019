@@ -1,1 +1,1 @@
-GET http://localhost:3001/api/persons
+GET http://salty-woodland-48406.herokuapp.com/api/persons

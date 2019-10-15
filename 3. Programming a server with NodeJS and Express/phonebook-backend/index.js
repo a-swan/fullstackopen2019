@@ -14,6 +14,7 @@ var loggerFormat = ':method :date[web] :status :res[content-length] - :response-
 
 app.use(morgan(loggerFormat))
 app.use(cors())
+app.use(express.static('build'))
 let phonebook = [
     {
         "name": "Arto Hellas",
