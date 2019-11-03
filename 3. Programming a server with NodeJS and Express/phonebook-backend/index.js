@@ -20,7 +20,6 @@ app.use(express.static('build'))
 
 app.get('/', (req, res) => {
     res.send('<h1>Hello World</h1>')
-    
 
     //console.log('Root Directory: Hello World')
 })
@@ -55,6 +54,7 @@ app.post('/api/persons', (req, res) => {
     person.save().then(response=>{
         console.log(`added ${body.name} number ${body.number} to phonebook`)
     })
+    
     //console.log(`Adding: ${person.name}`)
 
     res.json(person)
@@ -81,13 +81,12 @@ app.get('/api/persons/:id', (req, res) => {
             if(person){
                 res.json(person.toJSON())
             } else {
-                res.status(404).end()
+               res.status(404).end()
             }
+            
+            //res.json(person.toJSON())
         })
-        .catch(error => {
-            console.log(error)
-            res.status(400).send({error: 'malformatted id'})
-        })
+        .catch(error => next(error))
 })
 
 app.delete('/api/persons/:id', (req, res) => {
@@ -99,8 +98,27 @@ app.delete('/api/persons/:id', (req, res) => {
             console.log(error)
             res.status(400).send({error: 'delete error'})
         })
+        
     //console.log(`Deleted: ${id}`)
 })
+
+const unknownEndpoint = (request, response) => {
+    response.status(404).send({error: "unknown endpoint"})
+}
+
+app.use(unknownEndpoint)
+
+const errorHandler = (error, request, response, next) => {
+    console.log(error.message)
+
+    if(error.name === 'CastError' && error.kind === 'ObjectId'){
+        return response.status(400).send({error: 'malformatted id'})
+    }
+
+    next(error)
+}
+
+app.use(errorHandler)
 
 const port = process.env.PORT
 app.listen(port)
