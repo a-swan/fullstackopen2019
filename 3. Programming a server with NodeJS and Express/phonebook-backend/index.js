@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config({path: '.env'})
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
@@ -28,21 +28,8 @@ const generateId = () => {
     return Math.floor(Math.random() * Math.floor(1000000000000000))
 }
 
-app.post('/api/persons', (req, res) => {
+app.post('/api/persons', (req, res, next) => {
     const body = req.body
-
-    if (!body.name) {
-        //console.log('400: name missing')
-        return res.status(400).json({ error: 'name missing' })
-    }
-    else if (!body.number) {
-        //console.log('400: number missing')
-        return res.status(400).json({ error: 'number missing' })
-    }
-    /**else if (phonebook.find(person => person.name === body.name)) {
-        //console.log(`400: ${body.name} already in phonebook`)
-        return res.status(400).json({error: 'name must be unique'})
-    }**/
 
     const person = new Person({
         name: body.name,
@@ -50,14 +37,21 @@ app.post('/api/persons', (req, res) => {
         id: generateId()
     })
 
-    //phonebook = phonebook.concat(person)
-    person.save().then(response=>{
-        console.log(`added ${body.name} number ${body.number} to phonebook`)
-    })
-    
-    //console.log(`Adding: ${person.name}`)
+    person.save()
+        .then(savedPerson => {
+            console.log(`added ${body.name} number ${body.number} to phonebook`)
+            res.json(savedPerson.toJSON())
+        })
+        .catch(error => next(error))
 
-    res.json(person)
+})
+
+app.put('/api/persons/:id', (req, res, next) => {
+    Person.findByIdAndUpdate(req.params.id, {number: req.body.number}, {new: true})
+        .then(updatedPerson => {
+            res.json(updatedPerson.toJSON())
+        })
+        .catch(error => next(error))
 })
 
 app.get('/api/persons', (req, res) => {
@@ -69,13 +63,15 @@ app.get('/api/persons', (req, res) => {
 })
 
 app.get('/info', (req, res) => {
-    const datetime = new Date()
-    res.send(`<p>Phonebook has info for ${phonebook.length}<br />${datetime}</p>`)
-
-    //console.log(`Info: ${phonebook.length} ${datetime}`)
+    Person.estimatedDocumentCount((err, count) => {
+        if(err) {
+            return next(err)
+        }
+        res.send(`<p>Phonebook has info for ${count}<br />${new Date()}</p>`)
+    })
 })
 
-app.get('/api/persons/:id', (req, res) => {
+app.get('/api/persons/:id', (req, res, next) => {
     Person.findById(req.params.id)
         .then(person => {
             if(person){
@@ -83,21 +79,16 @@ app.get('/api/persons/:id', (req, res) => {
             } else {
                res.status(404).end()
             }
-            
-            //res.json(person.toJSON())
         })
         .catch(error => next(error))
 })
 
-app.delete('/api/persons/:id', (req, res) => {
+app.delete('/api/persons/:id', (req, res, next) => {
     Person.findByIdAndRemove(req.params.id)
         .then(result => {
             res.status(204).end()
         })
-        .catch(error => {
-            console.log(error)
-            res.status(400).send({error: 'delete error'})
-        })
+        .catch(error => next(error))
         
     //console.log(`Deleted: ${id}`)
 })
@@ -113,6 +104,9 @@ const errorHandler = (error, request, response, next) => {
 
     if(error.name === 'CastError' && error.kind === 'ObjectId'){
         return response.status(400).send({error: 'malformatted id'})
+    }
+    else if(error.name === 'ValidationError') {
+        return response.status(400).send({error: error.message})
     }
 
     next(error)

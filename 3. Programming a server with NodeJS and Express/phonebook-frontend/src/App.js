@@ -71,13 +71,20 @@ const App = () => {
                 .then(response => {
                     console.log("add response", response)
                     setPersons(persons.concat(response.data))
+                    setNotMessage(
+                        `Added ${newName}`
+                    )
+                    setTimeout(() => {
+                        setNotMessage(null)
+                    }, 5000)
                 })
-                setNotMessage(
-                    `Added ${newName}`
-                )
-                setTimeout(() => {
-                    setNotMessage(null)
-                }, 5000)
+                .catch(error => {
+                    setErrorMessage(error.response.data.error)
+                    setTimeout(() => {
+                        setErrorMessage(null)
+                    }, 5000)
+                    console.log(error.response.data)
+                })
         }
 
         //refresh text field
