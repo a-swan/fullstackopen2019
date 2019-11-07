@@ -2,6 +2,6 @@ POST http://salty-woodland-48406.herokuapp.com/api/persons
 Content-Type: application/json
 
 {
-    "name": "Alex",
-    "number": "111"
+    "name": "request test",
+    "number": "81675309"
 }
