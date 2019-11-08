@@ -19,27 +19,54 @@ const favoriteBlog = (blogs) => {
 }
 
 const mostBlogs = (blogs) => {
-    //if(blogs.length > 0){
-        const authors = _.reduce(blogs, (result, value, key) => {
-            ((result[value.author]) || (result[value.author] = [])).push(key)
+    const authors = _.reduce(blogs, (result, value, key) => {
+        ((result[value.author]) || (result[value.author] = [])).push(key)
 
-            return result
-        }, {}) 
+        return result
+    }, {}) 
 
-        // console.log(`${authors} ${_.isEmpty(authors)}`)
+    // console.log(`${authors} ${_.isEmpty(authors)}`)
 
-        const authSorted = Object.keys(authors).sort((acc, iter) => {
-            return authors[iter].length - authors[acc].length
-        })
+    const authSorted = Object.keys(authors).sort((acc, iter) => {
+        return authors[iter].length - authors[acc].length
+    })
 
-        // console.log(authSorted)
+    // console.log(authSorted)
 
-        return (_.isEmpty(authors) ? {} : {"author": authSorted[0],"blogs": authors[authSorted[0]].length})
-    //}
+    return (_.isEmpty(authors) ? {} : {"author": authSorted[0],"blogs": authors[authSorted[0]].length})
+}
+
+const mostLikes = (blogs) => {
+    const authors = _.reduce(blogs, (result, value, key) => {
+
+        // console.log(result[value.author])
+
+        if(!result[value.author]){
+            result[value.author] = Number(value.likes)
+        }
+        else{
+            result[value.author] += Number(value.likes)
+        }
+
+        // console.log(result)
+
+        return result
+    }, {})
+
+    // console.log(authors)
+
+    const authSorted = Object.keys(authors).sort((acc, iter) => {
+        return authors[iter] - authors[acc]
+    })
+
+    // console.log(authSorted)
+
+    return (_.isEmpty(authors)) ? {} : {"author": authSorted[0], "likes": authors[authSorted[0]]}
 }
 
 module.exports = {
     totalLikes,
     favoriteBlog,
-    mostBlogs
+    mostBlogs,
+    mostLikes
 }
