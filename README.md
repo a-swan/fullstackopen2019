@@ -20,7 +20,7 @@
     * ~~Saving data to MongoDB
     * ~~Validation and ESLint
 4. Testing Express servers, user administration
-    * Structure of backend application, introduction to testing
+    * ~~Structure of backend application, introduction to testing
     * Testing the backend
     * User adminstration
     * Token authentication

@@ -11,7 +11,7 @@ const totalLikes = (blogs) => {
 const favoriteBlog = (blogs) => {
     if(blogs.length > 0){
         return blogs.reduce((fav, iter) => {
-            return fav.likes < iter.likes ? fav = iter : fav = fav
+            return fav.likes < iter.likes ? iter : fav
         })
     }
     
@@ -25,7 +25,7 @@ const mostBlogs = (blogs) => {
         return result
     }, {}) 
 
-    // console.log(`${authors} ${_.isEmpty(authors)}`)
+    // console.log(authors)
 
     const authSorted = Object.keys(authors).sort((acc, iter) => {
         return authors[iter].length - authors[acc].length
