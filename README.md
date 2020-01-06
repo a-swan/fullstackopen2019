@@ -14,13 +14,13 @@
     * ~~Getting data from server~~
     * ~~Altering data in server~~
     * ~~Adding styles to React app~~
-3. ~~Programming a server with NodeJS and Express
-    * ~~Node.js and Express
-    * ~~Deploying app to internet
-    * ~~Saving data to MongoDB
-    * ~~Validation and ESLint
+3. ~~Programming a server with NodeJS and Express~~
+    * ~~Node.js and Express~~
+    * ~~Deploying app to internet~~
+    * ~~Saving data to MongoDB~~
+    * ~~Validation and ESLint~~
 4. Testing Express servers, user administration
-    * ~~Structure of backend application, introduction to testing
+    * ~~Structure of backend application, introduction to testing~~
     * Testing the backend
     * User adminstration
     * Token authentication
