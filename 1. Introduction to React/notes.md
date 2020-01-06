@@ -11,7 +11,7 @@
 ## Fragments
 - lets you group child elements without adding extra nodes to DOM
 - short syntax can wrap elements as a root element
-```js
+```
 <>
     <td>Hello</td>
     <td>World</td>
@@ -26,7 +26,7 @@
 **var** - outdated definition
 
 ## Destructuring
-```js
+```
 props = {
     name: 'Alex,
     age: 28

@@ -5,7 +5,7 @@ Calls a provided callback function once for each element in an array and constru
 
 >React uses a key attribute to efficiently update components. Using unique keys it knows which to mutate and which to keep at original state
 
-```js
+```
 const rows = () => notes.map(note => <li key={note.id}>{note.content}</li>)
 
 //...
@@ -17,7 +17,7 @@ const rows = () => notes.map(note => <li key={note.id}>{note.content}</li>)
 
 When mapping components, the key value is set at component call
 
-```js
+```
 const listCourses = () => courses.map(course => <Course key={course.id} course={course} />)
 
 //...
@@ -43,7 +43,7 @@ const totalExercises = courses.parts.reduce((totalExer,partIter) => {return tota
 ## Controlled Components
 HTML form elements maintain their own state, and since React states are only updated with ```setState()```, you need to reroute HTML state changes to defer to React
 
-```js
+```
 <input type="text" value={this.state.value} onChange={handleChange} />
 ```
 
