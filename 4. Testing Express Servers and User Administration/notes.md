@@ -22,3 +22,23 @@ A router is an isolated instance of middleware and routes. You can think of it a
 npx jest -t 'test title'
 ```
 
+## async/await
+Makes it possible to use async functions that return a promise in a way that makes the code look synchronous
+
+```.then()``` syntax registersa  callback function when the promise returns. To make several async calls in a row, you need sequential ```.then()``` functions to chain promises
+
+async/await allows the above chain to be reduced to a few lines
+
+```js
+const main = async () => {
+    const notes = await Note.find({})
+    console.log(notes)
+
+    const response = await notes[0].remove()
+    console.log('first note removed')
+}
+
+main()
+```
+
+```await``` can only be used inside of an ```async``` function
