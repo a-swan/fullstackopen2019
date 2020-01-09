@@ -49,9 +49,9 @@ test('blog is created with POST', async () => {
         .expect(201)
         .expect('Content-Type', /application\/json/)
 
-        const blogsAtEnd = await helper.blogsInDb()
+    const blogsAtEnd = await helper.blogsInDb()
 
-        expect(blogsAtEnd.length).toBe(helper.initBlogs.length+1)
+    expect(blogsAtEnd.length).toBe(helper.initBlogs.length+1)
 })
 
 test('no likes', async () => {
@@ -66,6 +66,30 @@ test('no likes', async () => {
         .send(newBlog)
     
     expect(addedBlog.body.likes).toBe(0)
+})
+
+test('require title and url', async () => {
+    const missingTitle = {
+        author: "Alex Pareene",
+        url: "https://splinternews.com/the-long-lucrative-right-wing-grift-is-blowing-up-in-t-1793944216",
+        likes: 66037
+    }
+
+    const missingURL = {
+        title: "The Long, Lucrative Right-wing Grift Is Blowing Up in the World's Face",
+        author: "Alex Pareene",
+        likes: 66037
+    }
+
+    await api
+        .post('/api/blogs')
+        .send(missingTitle)
+        .expect(400)
+
+    await api
+        .post('/api/blogs')
+        .send(missingURL)
+        .expect(400)
 })
 
 afterAll(() => {
