@@ -1,5 +1,6 @@
 POST http://localhost:3003/api/blogs/
 Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJpZCI6IjVlMWNiNjc5OTA4NTllMTNhMGUzZWVjOSIsImlhdCI6MTU3ODk0MDA1OH0.aTvuO1eCBRpd8hFQSPR6N9Drt0qaZaexHNyWsWDGhc4
 
 {
     "title": "How An Inner-City Minnesota High School Built a Girls’ Badminton Dynasty",
