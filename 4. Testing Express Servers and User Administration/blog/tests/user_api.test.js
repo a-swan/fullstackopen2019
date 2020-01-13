@@ -5,6 +5,8 @@ const app = require('../app')
 
 const api = supertest(app)
 
+mongoose.set('useCreateIndex', true)
+
 const User = require('../models/user')
 
 describe('when there is only one user in db', () => {
@@ -137,5 +139,9 @@ describe('when there is only one user in db', () => {
 
         const usersAtEnd = await helper.usersInDb()
         expect(usersAtEnd.length).toBe(usersAtStart.length)
+    })
+
+    afterAll(() => {
+        mongoose.connection.close()
     })
 })

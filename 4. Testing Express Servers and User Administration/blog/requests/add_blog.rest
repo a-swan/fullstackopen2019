@@ -3,7 +3,7 @@ Content-Type: application/json
 
 {
     "title": "How An Inner-City Minnesota High School Built a Girls’ Badminton Dynasty",
-    "author": "Sarah Barker",
+    "author": "Sarah Baxter",
     "url": "https://deadspin.com/how-an-inner-city-minnesota-high-school-built-a-girls-1825873078",
     "likes": 483
 }
