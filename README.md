@@ -21,9 +21,9 @@
     * ~~Validation and ESLint~~
 4. Testing Express servers, user administration
     * ~~Structure of backend application, introduction to testing~~
-    * Testing the backend
-    * User adminstration
-    * Token authentication
+    * ~~Testing the backend~~
+    * ~~User adminstration~~
+    * ~~Token authentication~~
 5. Testing React apps, custom hooks
     * Login in frontend
     * props.children and proptypes
