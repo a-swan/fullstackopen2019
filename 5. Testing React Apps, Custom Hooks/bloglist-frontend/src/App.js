@@ -14,6 +14,15 @@ const App = () => {
         .then(initBlogs => setBlogs(initBlogs))
   }, [])
 
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
+    if(loggedUserJSON){
+      const user = JSON.parse(loggedUserJSON)
+      setUser(user)
+      blogService.setToken(user.token)
+    }
+  }, [])
+
   const handleLogin = async (event) => {
     event.preventDefault()
     console.log('logging in with', username, password)
@@ -21,10 +30,13 @@ const App = () => {
     try{
       const user = await loginService.login({username, password})
 
+      window.localStorage.setItem('loggedBlogappUser', JSON.stringify(user))
+
+      blogService.setToken(user.token)
       setUser(user)
       console.log(user)
-      setUsername(username)
-      setPassword(password)
+      setUsername('')
+      setPassword('')
     }catch(exception) {
       console.log('Wrong Credentials')
     }
@@ -37,11 +49,11 @@ const App = () => {
         <form onSubmit={handleLogin}>
           <div>
             username 
-            <input type="text" value={username} onChange={({target}) => setUsername(target.value)} />
+            <input type="text" value={username} name="Username" onChange={({target}) => setUsername(target.value)} />
           </div>
           <div>
             password 
-            <input type="text" value={password} onChange={({target}) => setPassword(target.value)} />
+            <input type="password" value={password} name="Password" onChange={({target}) => setPassword(target.value)} />
           </div>
 
           <button type="submit">login</button>
@@ -53,7 +65,7 @@ const App = () => {
   return (
     <div>
       <h2>blogs</h2>
-      <p>{user.name} logged in</p>
+      <p>{user.name} logged in <button onClick={() => setUser(null)}>logout</button></p>
       {blogs.map(blog =>
         <Blog key={blog.id} blog={blog} />
       )}
