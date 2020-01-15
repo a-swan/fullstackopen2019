@@ -2,9 +2,13 @@ import React, {useState, useEffect} from 'react';
 import loginService from './services/login'
 import blogService from './services/blogs'
 import Blog from './components/Blog'
+import ErrorMessage from './components/ErrorMessage'
+import Notificatoin from './components/Notification'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
+  const [errorMessage, setErrorMessage] = useState(null)
+  const [notification, setNotification] = useState(null)
   const [newTitle, setNewTitle] = useState('')
   const [newAuthor, setNewAuthor] = useState('')
   const [newUrl, setNewUrl] = useState('')
@@ -42,29 +46,13 @@ const App = () => {
       setPassword('')
     }catch(exception) {
       console.log('Wrong Credentials')
+      setErrorMessage('Wrong Credentials')
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
     }
   }
   
-  if(user === null){
-    return(
-      <div>
-        <h2>Log in to application</h2>
-        <form onSubmit={handleLogin}>
-          <div>
-            username 
-            <input type="text" value={username} name="Username" onChange={({target}) => setUsername(target.value)} />
-          </div>
-          <div>
-            password 
-            <input type="password" value={password} name="Password" onChange={({target}) => setPassword(target.value)} />
-          </div>
-
-          <button type="submit">login</button>
-        </form>
-      </div>
-    )
-  }
-
   const blogForm = () => (
     <>
       <h2>create new</h2>
@@ -97,16 +85,53 @@ const App = () => {
       url: newUrl
     }
 
-    const data = await blogService.create(blogObject)
-    setBlogs(blogs.concat(data))
-    setNewTitle('')
-    setNewAuthor('')
-    setNewUrl('')
+    try{
+      const data = await blogService.create(blogObject)
+      setBlogs(blogs.concat(data))
+      setNewTitle('')
+      setNewAuthor('')
+      setNewUrl('')
+      setNotification(`a new blog ${newTitle} by ${newAuthor} added`)
+      setTimeout(() => {
+        setNotification(null)
+      }, 5000)
+    }catch(exception){
+      console.log(exception)
+      setErrorMessage(exception.error)
+      setTimeout(() => {
+        setErrorMessage(null)
+      })
+    }
+  }
+
+  if(user === null){
+    return(
+      <div>
+        <h2>Log in to application</h2>
+        <ErrorMessage message={errorMessage} />
+
+        <form onSubmit={handleLogin}>
+          <div>
+            username 
+            <input type="text" value={username} name="Username" onChange={({target}) => setUsername(target.value)} />
+          </div>
+          <div>
+            password 
+            <input type="password" value={password} name="Password" onChange={({target}) => setPassword(target.value)} />
+          </div>
+
+          <button type="submit">login</button>
+        </form>
+      </div>
+    )
   }
 
   return (
     <div>
       <h2>blogs</h2>
+      <ErrorMessage message={errorMessage}/>
+      <Notificatoin message={notification} />
+
       <p>{user.name} logged in <button onClick={() => setUser(null)}>logout</button></p>
 
       {blogForm()}
