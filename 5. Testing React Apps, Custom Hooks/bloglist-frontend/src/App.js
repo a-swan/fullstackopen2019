@@ -22,8 +22,9 @@ const App = () => {
       const user = await loginService.login({username, password})
 
       setUser(user)
-      setUsername('')
-      setPassword('')
+      console.log(user)
+      setUsername(username)
+      setPassword(password)
     }catch(exception) {
       console.log('Wrong Credentials')
     }
@@ -52,6 +53,7 @@ const App = () => {
   return (
     <div>
       <h2>blogs</h2>
+      <p>{user.name} logged in</p>
       {blogs.map(blog =>
         <Blog key={blog.id} blog={blog} />
       )}
