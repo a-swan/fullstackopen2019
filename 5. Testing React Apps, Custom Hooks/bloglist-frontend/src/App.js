@@ -66,13 +66,15 @@ const App = () => {
   }
 
   const blogForm = () => (
-    <h2>create new</h2>
-    <form onSubmit={addBlog}>
-      title:<input value={newTitle} onChange={handleTitleChange} /><br />
-      author:<input value={newAuthor} onChange={handleAuthorChange} /><br />
-      url:<input value={newUrl} onChange={handleUrlChange} /><br />
-      <button type="submit">save</button>
-    </form>
+    <>
+      <h2>create new</h2>
+      <form onSubmit={addBlog}>
+        title:<input value={newTitle} onChange={handleTitleChange} /><br />
+        author:<input value={newAuthor} onChange={handleAuthorChange} /><br />
+        url:<input value={newUrl} onChange={handleUrlChange} /><br />
+        <button type="submit">save</button>
+      </form>
+    </>
   )
 
   const handleTitleChange = (event) =>{
