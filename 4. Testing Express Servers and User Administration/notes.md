@@ -42,3 +42,44 @@ main()
 ```
 
 ```await``` can only be used inside of an ```async``` function
+
+## Document vs Relational Databases
+Relational dbs generally store data in separate tables, and single objects may be stored across several tables. With relational dbs, data structures are very rigid and difficult to change.
+
+##### Blog Table
+<table>
+    <tr>
+        <th>id</th>
+        <th>title</th>
+        <th>author</th>
+        <th>user</th>
+        <th>url</th>
+        <th>likes</th>
+    </tr>
+    <tr>
+        <td>123</td>
+        <td>Blog Title</td>
+        <td>Fn LastName</td>
+        <td>987</td>
+        <td>www.link</td>
+        <td>500</td>
+    </tr>
+</table>
+
+##### User Table
+<table>
+    <tr>
+        <th>id</th>
+        <th>username</th>
+        <th>name</th>
+    </tr>
+    <tr>
+        <td>987</td>
+        <td>f.lastname</td>
+        <td>Fn LastName</td>
+    </tr>
+</table>
+
+Document databases need to make multiple queries to join or aggregate data
+
+Doc dbs also allow the flexibility to store references in **both** dbs
