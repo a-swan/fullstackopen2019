@@ -1,26 +1,63 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState, useEffect} from 'react';
+import loginService from './services/login'
+import blogService from './services/blogs'
+import Blog from './components/Blog'
 
-function App() {
+const App = () => {
+  const [blogs, setBlogs] = useState([])
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [user, setUser] = useState(null)
+
+  useEffect(() => {
+      blogService.getAll()
+        .then(initBlogs => setBlogs(initBlogs))
+  }, [])
+
+  const handleLogin = async (event) => {
+    event.preventDefault()
+    console.log('logging in with', username, password)
+
+    try{
+      const user = await loginService.login({username, password})
+
+      setUser(user)
+      setUsername('')
+      setPassword('')
+    }catch(exception) {
+      console.log('Wrong Credentials')
+    }
+  }
+  
+  if(user === null){
+    return(
+      <div>
+        <h2>Log in to application</h2>
+        <form onSubmit={handleLogin}>
+          <div>
+            username 
+            <input type="text" value={username} onChange={({target}) => setUsername(target.value)} />
+          </div>
+          <div>
+            password 
+            <input type="text" value={password} onChange={({target}) => setPassword(target.value)} />
+          </div>
+
+          <button type="submit">login</button>
+        </form>
+      </div>
+    )
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h2>blogs</h2>
+      {blogs.map(blog =>
+        <Blog key={blog.id} blog={blog} />
+      )}
     </div>
-  );
+  )
+  
 }
 
 export default App;

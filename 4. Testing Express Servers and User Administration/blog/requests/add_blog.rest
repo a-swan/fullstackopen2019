@@ -1,10 +1,10 @@
 POST http://localhost:3003/api/blogs/
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJpZCI6IjVlMWNiNjc5OTA4NTllMTNhMGUzZWVjOSIsImlhdCI6MTU3ODk0MDA1OH0.aTvuO1eCBRpd8hFQSPR6N9Drt0qaZaexHNyWsWDGhc4
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFzd2Fuc29uIiwiaWQiOiI1ZTFjOWQxNDZiOGE2OTMyMDAwNGFhMGIiLCJpYXQiOjE1NzkwOTUyOTF9.EBtR3FMNRlsHdV9fKeHzfQe1jBftGafauLrbrgKRMUI
 
 {
-    "title": "How An Inner-City Minnesota High School Built a Girls’ Badminton Dynasty",
-    "author": "Sarah Baxter",
-    "url": "https://deadspin.com/how-an-inner-city-minnesota-high-school-built-a-girls-1825873078",
-    "likes": 483
+    "title": "This is How It's Going to Work",
+    "author": "Drew Magary",
+    "url": "https://drewmagary.kinja.com/this-is-how-it-s-gonna-work-1839505029",
+    "likes": 2581
 }
