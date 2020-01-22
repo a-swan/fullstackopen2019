@@ -4,6 +4,7 @@ import blogService from './services/blogs'
 import Blog from './components/Blog'
 import ErrorMessage from './components/ErrorMessage'
 import Notificatoin from './components/Notification'
+import BlogForm from './components/BlogForm'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -15,6 +16,7 @@ const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
+  const [loginVisible, setLoginVisible] = useState(false)
 
   useEffect(() => {
       blogService.getAll()
@@ -53,17 +55,31 @@ const App = () => {
     }
   }
   
-  const blogForm = () => (
-    <>
-      <h2>create new</h2>
-      <form onSubmit={addBlog}>
-        title:<input value={newTitle} onChange={handleTitleChange} /><br />
-        author:<input value={newAuthor} onChange={handleAuthorChange} /><br />
-        url:<input value={newUrl} onChange={handleUrlChange} /><br />
-        <button type="submit">save</button>
-      </form>
-    </>
-  )
+  const blogForm = () => {
+    const hideWhenVisible = {display: loginVisible ? 'none' : ''}
+    const showWhenVisible = {display: loginVisible ? '' : 'none'}
+
+    return (
+      <div>
+        <div style={hideWhenVisible}>
+          <button onClick={() => setLoginVisible(true)}>log in</button>
+        </div>
+        <div style={showWhenVisible}>
+          <BlogForm
+            handleSubmit={addBlog}
+            handleAuthorChange={handleAuthorChange}
+            handleTitleChange={handleTitleChange}
+            handleUrlChange={handleUrlChange}
+            author={newAuthor}
+            title={newTitle}
+            url={newUrl}
+          />
+
+          <button onClick={() => setLoginVisible(false)}>cancel</button>
+        </div>
+      </div>
+    )
+  }
 
   const handleTitleChange = (event) =>{
     setNewTitle(event.target.value)
