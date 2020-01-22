@@ -5,6 +5,8 @@ import Blog from './components/Blog'
 import ErrorMessage from './components/ErrorMessage'
 import Notificatoin from './components/Notification'
 import BlogForm from './components/BlogForm'
+import Toggleable from './components/Toggleable'
+import LoginForm from './components/LoginForm'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -54,32 +56,6 @@ const App = () => {
       }, 5000)
     }
   }
-  
-  const blogForm = () => {
-    const hideWhenVisible = {display: loginVisible ? 'none' : ''}
-    const showWhenVisible = {display: loginVisible ? '' : 'none'}
-
-    return (
-      <div>
-        <div style={hideWhenVisible}>
-          <button onClick={() => setLoginVisible(true)}>log in</button>
-        </div>
-        <div style={showWhenVisible}>
-          <BlogForm
-            handleSubmit={addBlog}
-            handleAuthorChange={handleAuthorChange}
-            handleTitleChange={handleTitleChange}
-            handleUrlChange={handleUrlChange}
-            author={newAuthor}
-            title={newTitle}
-            url={newUrl}
-          />
-
-          <button onClick={() => setLoginVisible(false)}>cancel</button>
-        </div>
-      </div>
-    )
-  }
 
   const handleTitleChange = (event) =>{
     setNewTitle(event.target.value)
@@ -120,11 +96,10 @@ const App = () => {
     }
   }
 
-  if(user === null){
+  const loginForm = () => {
     return(
       <div>
         <h2>Log in to application</h2>
-        <ErrorMessage message={errorMessage} />
 
         <form onSubmit={handleLogin}>
           <div>
@@ -148,13 +123,28 @@ const App = () => {
       <ErrorMessage message={errorMessage}/>
       <Notificatoin message={notification} />
 
-      <p>{user.name} logged in <button onClick={() => setUser(null)}>logout</button></p>
+      {user === null ?
+        loginForm():
+        <div>
+          <p>{user.name} logged in <button onClick={() => setUser(null)}>logout</button></p>
 
-      {blogForm()}
+          <Toggleable buttonLabel="new blog">
+            <BlogForm
+              handleSubmit={addBlog}
+              handleAuthorChange={handleAuthorChange}
+              handleTitleChange={handleTitleChange}
+              handleUrlChange={handleUrlChange}
+              author={newAuthor}
+              title={newTitle}
+              url={newUrl}
+            />
+          </Toggleable>
 
-      {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} />
-      )}
+          {blogs.map(blog =>
+            <Blog key={blog.id} blog={blog} />
+          )}
+        </div>
+      }
     </div>
   )
   
