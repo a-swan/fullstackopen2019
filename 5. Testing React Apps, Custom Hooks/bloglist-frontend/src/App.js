@@ -19,6 +19,8 @@ const App = () => {
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
 
+  const blogFormRef = React.createRef()
+
   useEffect(() => {
       blogService.getAll()
         .then(initBlogs => setBlogs(initBlogs))
@@ -125,34 +127,37 @@ const App = () => {
     )
   }
 
+  const blogForm = () => {
+    return(
+      <div>
+        <p>{user.name} logged in <button onClick={() => setUser(null)}>logout</button></p>
+
+        <Toggleable buttonLabel="new blog" ref={blogFormRef}>
+          <BlogForm
+            handleSubmit={addBlog}
+            handleAuthorChange={handleAuthorChange}
+            handleTitleChange={handleTitleChange}
+            handleUrlChange={handleUrlChange}
+            author={newAuthor}
+            title={newTitle}
+            url={newUrl}
+          />
+        </Toggleable>
+
+        {blogs.map(blog =>
+          <Blog key={blog.id} blog={blog} />
+        )}
+      </div>
+    )
+  }
+
   return (
     <div>
       <h2>blogs</h2>
       <ErrorMessage message={errorMessage}/>
       <Notificatoin message={notification} />
 
-      {user === null ?
-        loginForm():
-        <div>
-          <p>{user.name} logged in <button onClick={() => setUser(null)}>logout</button></p>
-
-          <Toggleable buttonLabel="new blog">
-            <BlogForm
-              handleSubmit={addBlog}
-              handleAuthorChange={handleAuthorChange}
-              handleTitleChange={handleTitleChange}
-              handleUrlChange={handleUrlChange}
-              author={newAuthor}
-              title={newTitle}
-              url={newUrl}
-            />
-          </Toggleable>
-
-          {blogs.map(blog =>
-            <Blog key={blog.id} blog={blog} />
-          )}
-        </div>
-      }
+      {user === null ? loginForm() : blogForm()}
     </div>
   )
   
