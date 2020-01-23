@@ -18,7 +18,6 @@ const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
-  const [loginVisible, setLoginVisible] = useState(false)
 
   useEffect(() => {
       blogService.getAll()
@@ -96,23 +95,32 @@ const App = () => {
     }
   }
 
+  // const loginForm = () => {
+  //   return(
+  //     <div>
+  //       <LoginForm
+  //         handleSubmit={handleLogin}
+  //         username={username}
+  //         handleUsernameChange={({target}) => setUsername(target.value)}
+  //         password={password}
+  //         handlePasswordChange={({target}) => setPassword(target.value)}
+  //       />
+  //     </div>
+  //   )
+  // }
+
   const loginForm = () => {
     return(
       <div>
-        <h2>Log in to application</h2>
-
-        <form onSubmit={handleLogin}>
-          <div>
-            username 
-            <input type="text" value={username} name="Username" onChange={({target}) => setUsername(target.value)} />
-          </div>
-          <div>
-            password 
-            <input type="password" value={password} name="Password" onChange={({target}) => setPassword(target.value)} />
-          </div>
-
-          <button type="submit">login</button>
-        </form>
+        <Toggleable buttonLabel="log in">
+          <LoginForm
+            handleSubmit={handleLogin}
+            username={username}
+            handleUsernameChange={({target}) => setUsername(target.value)}
+            password={password}
+            handlePasswordChange={({target}) => setPassword(target.value)}
+          />
+        </Toggleable>        
       </div>
     )
   }
