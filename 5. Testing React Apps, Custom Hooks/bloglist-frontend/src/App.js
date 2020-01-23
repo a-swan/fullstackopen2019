@@ -72,6 +72,8 @@ const App = () => {
 
   const addBlog = async (event) => {
     event.preventDefault()
+    blogFormRef.current.toggleVisibility()
+
     const blogObject = {
       title: newTitle,
       author: newAuthor,
@@ -127,6 +129,10 @@ const App = () => {
     )
   }
 
+  const updateBlog = (event) => {
+    console.log(event)
+  }
+
   const blogForm = () => {
     return(
       <div>
@@ -145,7 +151,11 @@ const App = () => {
         </Toggleable>
 
         {blogs.map(blog =>
-          <Blog key={blog.id} blog={blog} />
+          <Blog
+            key={blog.id}
+            blog={blog}
+            handleUpdate={updateBlog}
+          />
         )}
       </div>
     )
