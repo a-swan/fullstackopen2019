@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 
-const Blog = ({ blog, handleUpdate, handleDelete }) => {
+const Blog = ({ blog, handleUpdate, handleDelete, user }) => {
   const [visible, setVisibility] = useState(false)
 
   // const hideWhenVisible = {display: visible ? 'none' : ''}
@@ -9,6 +9,8 @@ const Blog = ({ blog, handleUpdate, handleDelete }) => {
   const toggleVisibility = () => {
     setVisibility(!visible)
   }
+
+  const showRemove = {display: (user.username === blog.user.username) ? '' : 'none'}
 
   const blogStyle = {
     border: 'solid',
@@ -26,7 +28,7 @@ const Blog = ({ blog, handleUpdate, handleDelete }) => {
         {blog.url}<br/>
         {blog.likes} likes<button onClick={handleUpdate}>like</button><br/>
         added by {blog.user.name}<br/>
-        <button onClick={handleDelete}>remove</button>
+        <button style={showRemove} onClick={handleDelete}>remove</button>
       </div>
     </div>
   )

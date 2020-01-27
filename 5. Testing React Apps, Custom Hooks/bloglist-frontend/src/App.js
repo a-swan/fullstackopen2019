@@ -187,6 +187,7 @@ const App = () => {
               blog={blog}
               handleUpdate={() => updateBlog(blog.id)}
               handleDelete={() => deleteBlog(blog.id)}
+              user={user}
             />
         )}
       </div>
