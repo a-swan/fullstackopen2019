@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react'
 import loginService from './services/login'
 import blogService from './services/blogs'
 import Blog from './components/Blog'
@@ -22,8 +22,8 @@ const App = () => {
   const blogFormRef = React.createRef()
 
   useEffect(() => {
-      blogService.getAll()
-        .then(initBlogs => setBlogs(initBlogs))
+    blogService.getAll()
+      .then(initBlogs => setBlogs(initBlogs))
   }, [])
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const App = () => {
     console.log('logging in with', username, password)
 
     try{
-      const user = await loginService.login({username, password})
+      const user = await loginService.login({ username, password })
 
       window.localStorage.setItem('loggedBlogappUser', JSON.stringify(user))
 
@@ -58,15 +58,15 @@ const App = () => {
     }
   }
 
-  const handleTitleChange = (event) =>{
+  const handleTitleChange = (event) => {
     setNewTitle(event.target.value)
   }
 
-  const handleAuthorChange = (event) =>{
+  const handleAuthorChange = (event) => {
     setNewAuthor(event.target.value)
   }
 
-  const handleUrlChange = (event) =>{
+  const handleUrlChange = (event) => {
     setNewUrl(event.target.value)
   }
 
@@ -120,11 +120,11 @@ const App = () => {
           <LoginForm
             handleSubmit={handleLogin}
             username={username}
-            handleUsernameChange={({target}) => setUsername(target.value)}
+            handleUsernameChange={({ target }) => setUsername(target.value)}
             password={password}
-            handlePasswordChange={({target}) => setPassword(target.value)}
+            handlePasswordChange={({ target }) => setPassword(target.value)}
           />
-        </Toggleable>        
+        </Toggleable>
       </div>
     )
   }
@@ -132,7 +132,7 @@ const App = () => {
   const updateBlog = async (id) => {
     console.log('update', id)
     const blog = blogs.find(b => b.id === id)
-    const changedBlog = {...blog, likes: blog.likes += 1}
+    const changedBlog = { ...blog, likes: blog.likes += 1 }
 
     try{
       const data = await blogService.update(id, changedBlog)
@@ -149,7 +149,7 @@ const App = () => {
   const deleteBlog = async (id) => {
     console.log('delete', id)
     try{
-      const data = await blogService.remove(id)
+      await blogService.remove(id)
       setBlogs(blogs.filter(b => b.id !== id))
     } catch(exception){
       console.log(exception)
@@ -182,13 +182,13 @@ const App = () => {
         </Toggleable>
 
         {blogs.map(blog =>
-            <Blog
-              key={blog.id}
-              blog={blog}
-              handleUpdate={() => updateBlog(blog.id)}
-              handleDelete={() => deleteBlog(blog.id)}
-              user={user}
-            />
+          <Blog
+            key={blog.id}
+            blog={blog}
+            handleUpdate={() => updateBlog(blog.id)}
+            handleDelete={() => deleteBlog(blog.id)}
+            user={user}
+          />
         )}
       </div>
     )
@@ -203,7 +203,7 @@ const App = () => {
       {user === null ? loginForm() : blogForm()}
     </div>
   )
-  
+
 }
 
-export default App;
+export default App

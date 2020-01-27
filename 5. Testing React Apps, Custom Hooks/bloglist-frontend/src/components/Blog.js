@@ -1,16 +1,16 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 
 const Blog = ({ blog, handleUpdate, handleDelete, user }) => {
   const [visible, setVisibility] = useState(false)
 
   // const hideWhenVisible = {display: visible ? 'none' : ''}
-  const showWhenVisible = {display: visible ? '' : 'none'}
+  const showWhenVisible = { display: visible ? '' : 'none' }
 
   const toggleVisibility = () => {
     setVisibility(!visible)
   }
 
-  const showRemove = {display: (user.username === blog.user.username) ? '' : 'none'}
+  const showRemove = { display: (user.username === blog.user.username) ? '' : 'none' }
 
   const blogStyle = {
     border: 'solid',
