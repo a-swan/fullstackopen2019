@@ -147,6 +147,10 @@ const App = () => {
   }
 
   const blogForm = () => {
+    const sortedBlogs = blogs.sort((b1,b2) => {
+      return ((b1.likes < b2.likes) ? 1 : ((b1.likes > b2.likes) ? -1 : 0))
+    })
+
     return(
       <div>
         <p>{user.name} logged in <button onClick={() => setUser(null)}>logout</button></p>
@@ -164,11 +168,11 @@ const App = () => {
         </Toggleable>
 
         {blogs.map(blog =>
-          <Blog
-            key={blog.id}
-            blog={blog}
-            handleUpdate={() => updateBlog(blog.id)}
-          />
+            <Blog
+              key={blog.id}
+              blog={blog}
+              handleUpdate={() => updateBlog(blog.id)}
+            />
         )}
       </div>
     )
