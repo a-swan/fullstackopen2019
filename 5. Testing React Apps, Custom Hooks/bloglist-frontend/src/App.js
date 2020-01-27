@@ -130,7 +130,7 @@ const App = () => {
   }
 
   const updateBlog = async (id) => {
-    console.log(id)
+    console.log('update', id)
     const blog = blogs.find(b => b.id === id)
     const changedBlog = {...blog, likes: blog.likes += 1}
 
@@ -146,8 +146,22 @@ const App = () => {
     }
   }
 
+  const deleteBlog = async (id) => {
+    console.log('delete', id)
+    try{
+      const data = await blogService.remove(id)
+      setBlogs(blogs.filter(b => b.id !== id))
+    } catch(exception){
+      console.log(exception)
+      setErrorMessage(exception.error)
+      setTimeout(() => {
+        setErrorMessage(null)
+      })
+    }
+  }
+
   const blogForm = () => {
-    const sortedBlogs = blogs.sort((b1,b2) => {
+    blogs.sort((b1,b2) => {
       return ((b1.likes < b2.likes) ? 1 : ((b1.likes > b2.likes) ? -1 : 0))
     })
 
@@ -172,6 +186,7 @@ const App = () => {
               key={blog.id}
               blog={blog}
               handleUpdate={() => updateBlog(blog.id)}
+              handleDelete={() => deleteBlog(blog.id)}
             />
         )}
       </div>
