@@ -129,8 +129,21 @@ const App = () => {
     )
   }
 
-  const updateBlog = (event) => {
-    console.log(event)
+  const updateBlog = async (id) => {
+    console.log(id)
+    const blog = blogs.find(b => b.id === id)
+    const changedBlog = {...blog, likes: blog.likes += 1}
+
+    try{
+      const data = await blogService.update(id, changedBlog)
+      setBlogs(blogs.map(blog => blog.id !== id ? blog : data))
+    } catch(exception){
+      console.log(exception)
+      setErrorMessage(exception.error)
+      setTimeout(() => {
+        setErrorMessage(null)
+      })
+    }
   }
 
   const blogForm = () => {
@@ -154,7 +167,7 @@ const App = () => {
           <Blog
             key={blog.id}
             blog={blog}
-            handleUpdate={updateBlog}
+            handleUpdate={() => updateBlog(blog.id)}
           />
         )}
       </div>

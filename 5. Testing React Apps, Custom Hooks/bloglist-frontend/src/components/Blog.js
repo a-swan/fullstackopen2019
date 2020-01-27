@@ -24,7 +24,7 @@ const Blog = ({ blog, handleUpdate }) => {
       </div>
       <div style={showWhenVisible}>
         {blog.url}<br/>
-        {blog.likes} likes<button>like</button><br/>
+        {blog.likes} likes<button onClick={handleUpdate}>like</button><br/>
         added by {blog.user.name}<br/>
       </div>
     </div>
