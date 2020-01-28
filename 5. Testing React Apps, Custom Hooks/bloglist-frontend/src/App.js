@@ -13,14 +13,15 @@ const App = () => {
   const [blogs, setBlogs] = useState([])
   const [errorMessage, setErrorMessage] = useState(null)
   const [notification, setNotification] = useState(null)
-  const [newTitle, setNewTitle] = useState('')
-  const [newAuthor, setNewAuthor] = useState('')
-  const [newUrl, setNewUrl] = useState('')
-  // const [username, setUsername] = useState('')
-  // const [password, setPassword] = useState('')
+  // const [newTitle, setNewTitle] = useState('')
+  // const [newAuthor, setNewAuthor] = useState('')
+  // const [newUrl, setNewUrl] = useState('')
   const [user, setUser] = useState(null)
   const username = useField('text')
   const password = useField('password')
+  const title = useField('text')
+  const author = useField('text')
+  const url = useField('text')
 
   const blogFormRef = React.createRef()
 
@@ -61,35 +62,39 @@ const App = () => {
     }
   }
 
-  const handleTitleChange = (event) => {
-    setNewTitle(event.target.value)
-  }
+  // const handleTitleChange = (event) => {
+  //   setNewTitle(event.target.value)
+  // }
 
-  const handleAuthorChange = (event) => {
-    setNewAuthor(event.target.value)
-  }
+  // const handleAuthorChange = (event) => {
+  //   setNewAuthor(event.target.value)
+  // }
 
-  const handleUrlChange = (event) => {
-    setNewUrl(event.target.value)
-  }
+  // const handleUrlChange = (event) => {
+  //   setNewUrl(event.target.value)
+  // }
 
   const addBlog = async (event) => {
     event.preventDefault()
     blogFormRef.current.toggleVisibility()
 
     const blogObject = {
-      title: newTitle,
-      author: newAuthor,
-      url: newUrl
+      title: title.value,
+      author: author.value,
+      url: url.value
     }
 
     try{
       const data = await blogService.create(blogObject)
+      console.log("added blog: ", data)
       setBlogs(blogs.concat(data))
-      setNewTitle('')
-      setNewAuthor('')
-      setNewUrl('')
-      setNotification(`a new blog ${newTitle} by ${newAuthor} added`)
+      // setNewTitle('')
+      // setNewAuthor('')
+      // setNewUrl('')
+      title.reset()
+      author.reset()
+      url.reset()
+      setNotification(`a new blog ${title.value} by ${author.value} added`)
       setTimeout(() => {
         setNotification(null)
       }, 5000)
@@ -101,20 +106,6 @@ const App = () => {
       })
     }
   }
-
-  // const loginForm = () => {
-  //   return(
-  //     <div>
-  //       <LoginForm
-  //         handleSubmit={handleLogin}
-  //         username={username}
-  //         handleUsernameChange={({target}) => setUsername(target.value)}
-  //         password={password}
-  //         handlePasswordChange={({target}) => setPassword(target.value)}
-  //       />
-  //     </div>
-  //   )
-  // }
 
   const loginForm = () => {
     return(
@@ -173,12 +164,9 @@ const App = () => {
         <Toggleable buttonLabel="new blog" ref={blogFormRef}>
           <BlogForm
             handleSubmit={addBlog}
-            handleAuthorChange={handleAuthorChange}
-            handleTitleChange={handleTitleChange}
-            handleUrlChange={handleUrlChange}
-            author={newAuthor}
-            title={newTitle}
-            url={newUrl}
+            author={author}
+            title={title}
+            url={url}
           />
         </Toggleable>
 
