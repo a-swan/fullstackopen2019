@@ -25,10 +25,10 @@
     * ~~User adminstration~~
     * ~~Token authentication~~
 5. Testing React apps, custom hooks
-    * Login in frontend
-    * props.children and proptypes
-    * Testing React apps
-    * Custom hooks
+    * ~~Login in frontend~~
+    * ~~props.children and proptypes~~
+    * ~~Testing React apps~~
+    * ~~Custom hooks~~
 6. State management with Redux
     * Flux-architecture and Redux
     * Many reducers, connect
