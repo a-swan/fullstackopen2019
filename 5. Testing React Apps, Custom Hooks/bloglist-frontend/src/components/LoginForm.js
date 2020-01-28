@@ -3,9 +3,7 @@ import React from 'react'
 const LoginForm = ({
   handleSubmit,
   username,
-  handleUsernameChange,
   password,
-  handlePasswordChange
 }) => {
   return (
     <div>
@@ -14,11 +12,11 @@ const LoginForm = ({
       <form onSubmit={handleSubmit}>
         <div>
                     username
-          <input type="text" value={username} name="Username" onChange={handleUsernameChange} />
+          <input type={username.type} value={username.value} name="Username" onChange={username.onChange} />
         </div>
         <div>
                     password
-          <input type="password" value={password} name="Password" onChange={handlePasswordChange} />
+          <input type={password.type} value={password.value} name="Password" onChange={password.onChange} />
         </div>
 
         <button type="submit">login</button>
