@@ -36,12 +36,21 @@ const reducer = (state = initialState, action) => {
       }
 
       console.log("updated: ", changedAnec)
-      return state.map(a => a.id !== id ? a : changedAnec)
+      const changedState = state.map(a => a.id !== id ? a : changedAnec)
+      console.log(changedState)
+      return changedState
     default:
       return state
   }
 
-  return state
+  // return state
+}
+
+export const vote = (id) => {
+  return{
+    type: 'VOTE',
+    id: id
+  }
 }
 
 export default reducer
