@@ -4,7 +4,7 @@ import Anecdote from './Anecdote'
 import {vote} from '../reducers/anecdoteReducer'
 
 const Anecdotes = ({store}) => {
-    const anecdotes = store.getState().sort((a1, a2) => {
+    const anecdotes = store.getState().anecdotes.sort((a1, a2) => {
         return ((a1.votes < a2.votes) ? 1 : (a1.votes > a2.votes) ? -1 : 0)
     })
     return (

@@ -1,14 +1,12 @@
 import React from 'react';
-import { createStore } from 'redux'
-import reducer from './reducers/anecdoteReducer'
 import Anecdotes from './components/Anecdotes'
 import AnecdoteForm from './components/AnecdoteForm'
-
-const store = createStore(reducer)
+import Notification from './components/Notification'
 
 const App = (props) => {
   return (
     <div>
+      <Notification store={props.store}/>
       <Anecdotes store={props.store}/>
       <AnecdoteForm store={props.store}/>
     </div>
