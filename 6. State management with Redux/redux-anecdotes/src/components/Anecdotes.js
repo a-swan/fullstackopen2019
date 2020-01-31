@@ -14,7 +14,7 @@ const Anecdotes = ({store}) => {
                 <Anecdote
                     key={anec.id}
                     anec={anec}
-                    handleClick={() => store.dispatch(vote(anec.id))}
+                    handleClick={() => store.dispatch(vote(anec))}
                 />
             )}
         </>

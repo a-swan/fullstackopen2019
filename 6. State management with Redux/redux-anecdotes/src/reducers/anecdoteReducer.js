@@ -25,7 +25,7 @@ const reducer = (state = initialState, action) => {
 
   switch(action.type){
     case 'VOTE':
-      const id = action.id
+      const id = action.anec.id
       const anecToChange = state.find(a => a.id === id)
       // console.log(id, anecToChange)
       const changedAnec = {
@@ -43,10 +43,10 @@ const reducer = (state = initialState, action) => {
   }
 }
 
-export const vote = (id) => {
+export const vote = (anec) => {
   return{
     type: 'VOTE',
-    id: id
+    anec: anec
   }
 }
 
