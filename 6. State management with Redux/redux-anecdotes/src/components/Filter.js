@@ -20,19 +20,19 @@ const Filter = (props) => {
     )
 }
 
-const mapStateToProps = (state) => {
-    console.log(state)
+// const mapStateToProps = (state) => {
+//     console.log(state)
 
-    return{
-        anecdotes: state.anecdotes,
-        filter: state.filter
-    }
-}
+//     return{
+//         anecdotes: state.anecdotes,
+//         filter: state.filter
+//     }
+// }
 
 const mapDispatchToProps = {
     filterAnec,
 }
 
-const ConnectedFilter = connect(mapStateToProps, mapDispatchToProps)(Filter)
+const ConnectedFilter = connect(null, mapDispatchToProps)(Filter)
 
 export default ConnectedFilter

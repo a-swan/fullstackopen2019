@@ -10,10 +10,6 @@ const Anecdotes = (props) => {
         return ((a1.votes < a2.votes) ? 1 : (a1.votes > a2.votes) ? -1 : 0)
     })
 
-    // const filterAnecdotes = () => {
-    //     return (props.filter.length > 0) ? sortAnecdotes.filter(anec => anec.content.includes(props.filter)) : sortAnecdotes
-    // }
-
     return (
         <>
             <h2>Anecdotes</h2>
