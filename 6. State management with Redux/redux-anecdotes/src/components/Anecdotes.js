@@ -10,14 +10,14 @@ const Anecdotes = (props) => {
         return ((a1.votes < a2.votes) ? 1 : (a1.votes > a2.votes) ? -1 : 0)
     })
 
-    const filterAnecdotes = () => {
-        return (props.filter.length > 0) ? sortAnecdotes.filter(anec => anec.content.includes(props.filter)) : sortAnecdotes
-    }
+    // const filterAnecdotes = () => {
+    //     return (props.filter.length > 0) ? sortAnecdotes.filter(anec => anec.content.includes(props.filter)) : sortAnecdotes
+    // }
 
     return (
         <>
             <h2>Anecdotes</h2>
-            {filterAnecdotes().map(anec => 
+            {props.visibleAnecdotes.map(anec => 
                 <Anecdote
                     key={anec.id}
                     anec={anec}
@@ -28,12 +28,17 @@ const Anecdotes = (props) => {
     )
 }
 
+const anecdotesToShow = ({anecdotes, filter}) => {
+    return (filter.length > 0) ? anecdotes.filter(a => a.content.includes(filter)) : anecdotes
+}
+
 const mapStateToProps = (state) => {
     console.log(state)
 
     return{
         anecdotes: state.anecdotes,
-        filter: state.filter
+        filter: state.filter,
+        visibleAnecdotes: anecdotesToShow(state),
     }
 }
 
