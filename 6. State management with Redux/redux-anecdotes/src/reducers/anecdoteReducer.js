@@ -61,14 +61,10 @@ export const initializeAnecdotes = (anecs) => {
   }
 }
 
-export const createAnecdote = (content) => {
+export const createAnecdote = (data) => {
   return{
     type: 'NEW_ANEC',
-    data: {
-      content,
-      id: getId(),
-      votes: 0
-    }
+    data
   }
 }
 
