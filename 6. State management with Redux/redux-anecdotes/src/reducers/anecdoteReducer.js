@@ -38,6 +38,9 @@ const reducer = (state = initialState, action) => {
       return changedState
     case 'NEW_ANEC':
       return [...state, action.data]
+    // case 'FILTER':
+    //   console.log(action.filter.length)
+    //   return (action.filter.length > 0) ? state.filter(anec => anec.content.includes(action.filter)) : state
     default:
       return state
   }
