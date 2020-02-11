@@ -6,7 +6,7 @@ const reducer = (state = [], action) => {
 
   switch(action.type){
     case 'VOTE':
-      const id = action.anec.id
+      const id = action.data.id
       const anecToChange = state.find(a => a.id === id)
       // console.log(id, anecToChange)
       const changedAnec = {
@@ -29,9 +29,18 @@ const reducer = (state = [], action) => {
 }
 
 export const vote = (anec) => {
-  return{
-    type: 'VOTE',
-    anec: anec
+  return async dispatch => {
+    const updateAnec = {
+      content: anec.content,
+      id: anec.id,
+      votes: anec.votes + 1,
+    }
+
+    const votedAnec = await noteService.update(anec.id, updateAnec)
+    dispatch({
+      type: 'VOTE',
+      data: votedAnec
+    })
   }
 }
 
