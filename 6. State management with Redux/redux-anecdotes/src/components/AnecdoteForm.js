@@ -8,8 +8,7 @@ const AnecdoteForm = (props) => {
         event.preventDefault()
         const content = event.target.anec.value
         event.target.anec.value = ''
-        const newAnec = await anecdoteService.createNew(content)
-        props.createAnecdote(newAnec)
+        props.createAnecdote(content)
     }
     
     return(

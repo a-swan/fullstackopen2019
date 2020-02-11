@@ -45,10 +45,13 @@ export const initializeAnecdotes = () => {
   }
 }
 
-export const createAnecdote = (data) => {
-  return{
-    type: 'NEW_ANEC',
-    data
+export const createAnecdote = (content) => {
+  return async dispatch => {
+    const newAnec = await noteService.createNew(content)
+    dispatch({
+      type: 'NEW_ANEC',
+      data: newAnec,
+    })
   }
 }
 
