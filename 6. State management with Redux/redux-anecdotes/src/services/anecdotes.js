@@ -7,8 +7,6 @@ const getAll = async () => {
     return response.data
 }
 
-const getId = () => (100000 * Math.random()).toFixed(0)
-
 const createNew = async content => {
     const obj = {content, votes: 0}
     const response = await axios.post(baseUrl, obj)

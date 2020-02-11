@@ -6,9 +6,9 @@ import {vote} from '../reducers/anecdoteReducer'
 
 const Anecdotes = (props) => {
 
-    const sortAnecdotes = props.anecdotes.sort((a1, a2) => {
-        return ((a1.votes < a2.votes) ? 1 : (a1.votes > a2.votes) ? -1 : 0)
-    })
+    // const sortAnecdotes = props.anecdotes.sort((a1, a2) => {
+    //     return ((a1.votes < a2.votes) ? 1 : (a1.votes > a2.votes) ? -1 : 0)
+    // })
 
     return (
         <>

@@ -20,15 +20,6 @@ const Filter = (props) => {
     )
 }
 
-// const mapStateToProps = (state) => {
-//     console.log(state)
-
-//     return{
-//         anecdotes: state.anecdotes,
-//         filter: state.filter
-//     }
-// }
-
 const mapDispatchToProps = {
     filterAnec,
 }
