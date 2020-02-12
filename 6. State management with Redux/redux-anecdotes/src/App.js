@@ -5,10 +5,12 @@ import AnecdoteForm from './components/AnecdoteForm'
 import Notification from './components/Notification'
 import Filter from './components/Filter'
 import {initializeAnecdotes} from './reducers/anecdoteReducer'
+import {clearNotification} from './reducers/notificationReducer'
 
 const App = (props) => {
   useEffect(() => {
     props.initializeAnecdotes()
+    props.clearNotification()
   }, [])
 
   return (
@@ -21,4 +23,4 @@ const App = (props) => {
   )
 }
 
-export default connect(null, {initializeAnecdotes})(App)
+export default connect(null, {initializeAnecdotes, clearNotification})(App)

@@ -3,13 +3,13 @@ import {connect} from 'react-redux'
 import Anecdote from './Anecdote'
 
 import {vote} from '../reducers/anecdoteReducer'
+import {showNotificationWithTimeout} from '../reducers/notificationReducer'
 
 const Anecdotes = (props) => {
 
     const sortAnecdotes = props.anecdotes.sort((a1, a2) => {
         return ((a1.votes < a2.votes) ? 1 : (a1.votes > a2.votes) ? -1 : 0)
     })
-    
 
     return (
         <>
@@ -18,7 +18,11 @@ const Anecdotes = (props) => {
                 <Anecdote
                     key={anec.id}
                     anec={anec}
-                    handleClick={() => props.vote(anec)}
+                    handleClick={() => {
+                            props.showNotificationWithTimeout(anec, 10000)
+                            props.vote(anec)
+                        }
+                    }
                 />
             )}
         </>
@@ -41,6 +45,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
     vote,
+    showNotificationWithTimeout,
 }
 
 const ConnectedAnecdotes = connect(mapStateToProps, mapDispatchToProps)(Anecdotes)

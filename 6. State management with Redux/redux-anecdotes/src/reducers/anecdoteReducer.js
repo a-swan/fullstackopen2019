@@ -41,6 +41,11 @@ export const vote = (anec) => {
       type: 'VOTE',
       data: votedAnec
     })
+
+    dispatch({
+      type: 'NOTIFY',
+      data: votedAnec.content
+    })
   }
 }
 
