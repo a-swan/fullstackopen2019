@@ -19,7 +19,7 @@
 ```
 
 ## JS Variable Definitions
-**const** - defines a constant where the value can't e changed
+**const** - defines a constant where the value can't be changed
 
 **let** - defines a normal variable
 
