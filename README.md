@@ -1,5 +1,5 @@
-# Full Stack Open 2019
-## Deep Dive Into Modern Web Development
+# Full Stack Open 2019: Deep Dive Into Modern Web Development
+https://fullstackopen.com/en
 
 ### Table of Contents
 0. ~~Fundamentals of Web Apps~~
@@ -30,16 +30,16 @@
     * ~~Testing React apps~~
     * ~~Custom hooks~~
 6. State management with Redux
-    * Flux-architecture and Redux
-    * Many reducers, connect
-    * Communicating with server in a redux application
+    * ~~Flux-architecture and Redux~~
+    * ~~Many reducers, connect~~
+    * ~~Communicating with server in a redux application~~
 7. React router, styling app with CSS and webpack
-    * React-router
-    * More about styles
-    * Webpack
-    * Class components, E2E-testing
-    * Miscellaneous
-    * Exercises: extending the bloglist
+    * ~~React-router~~
+    * ~~More about styles~~
+    * ~~Webpack~~
+    * ~~Class components, E2E-testing~~
+    * ~~Miscellaneous~~
+    * ~~Exercises: extending the bloglist~~
 8. GraphQL
     * GraphQL-server
     * React and GraphQL
